@@ -1,7 +1,6 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-from functools import reduce
 from win10toast import ToastNotifier
 
 class TapList:
@@ -108,6 +107,8 @@ notif_str = f"There are {num_rus} beers from Russian River on tap at Briggs: {ru
 
 notifier.show_toast("Russian River Brewing",
                     notif_str,
+                    icon_path = "icon.ico",
+                    duration = 10
                     )
 
 
