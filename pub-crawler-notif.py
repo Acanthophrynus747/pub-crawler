@@ -2,6 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from win10toast import ToastNotifier
+from notificationsender import notify
 
 class TapList:
     def __init__(self, name):
@@ -39,10 +40,7 @@ a = soup.find_all("a")
 things = soup.find_all('a', href=True, string = re.compile('Russian River Brewing Co')) #re compile searches for everything roughly containing the string
 #maybe could also search by href
 
-print(len(a))
-
 menu_items = soup.find_all("li", class_ = re.compile("menu-item"))
-print(len(menu_items))
 
 briggs = TapList("briggs_taplist")
 
@@ -94,7 +92,7 @@ for beer in briggs.beer_list:
 
 russian_river = briggs.brewerySearch("Russian River Brewing")
 
-print(russian_river)
+# print(russian_river)
 
 num_rus = len(russian_river)
 
@@ -103,12 +101,14 @@ rus_list = ""
 for item in russian_river:
     rus_list += str(item[0]) + ", "
 
-notif_str = f"There are {num_rus} beers from Russian River on tap at Briggs: {rus_list}"
+notif_str = f"There are {num_rus} beers from Russian River Brewing Company on tap at Briggs Taphouse: {rus_list}"
 
-notifier.show_toast("Russian River Brewing",
+# notify("Briggs Taphouse", notif_str, "icon.ico", 10) #idk if this is the best way to do it
+
+notifier.show_toast("Briggs Taphouse",
                     notif_str,
                     icon_path = "icon.ico",
-                    duration = 10
+                    duration = 20
                     )
 
 
